@@ -1,0 +1,15 @@
+// Place all the styles related to the registrations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+table {                                                // Table styling
+    border-collapse: collapse;
+}
+
+table, th, td {                                        // Only border at bottom
+    border-bottom: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}

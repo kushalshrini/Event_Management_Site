@@ -1,0 +1,27 @@
+// Place all the styles related to the coordinators controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#form_align{
+  background-color: white;
+  width: 500px;
+  transform: translateY(65px);
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+#form_content{
+  color: #9f3a38;
+  padding:2px;
+  text-align: center;
+}
+
+#sign_in_body{
+   background-color: #f7f7f7;
+}
+
+.close{
+  float: right;
+  cursor: pointer;
+}

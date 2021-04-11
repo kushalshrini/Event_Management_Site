@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Milestone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+  </head>
+
+  <body>
+    <div class="ui container" style="margin: 15px; display:flex; text-align:center; justify-content: center;">
+      <% if coordinator_signed_in? %>
+        <div>
+          <%= link_to "Home", root_path, class: "ui inverted green button" %>
+          <%= link_to "New Event", new_event_path, class: 'ui inverted purple button' %>
+          <%= link_to "Listing", registrations_path, class: 'ui inverted purple button' %>
+          <%= link_to "Profile", profile_index_path, class: "ui inverted purple button" %>
+          <%= link_to "Logout", destroy_coordinator_session_path, method: :delete, data: {confirm: "Are you sure?"}, class: 'ui inverted red button' %>
+        </div>
+      <% end %>
+    </div>
+
+   <!-- Displaying Flash messages -->
+   <div class="ui container" id="error_messages_display" style="position: absolute; width: 100%; height: auto; text-align: center; z-index: 3; opacity: 1; font-weight: bolder;">
+     <!-- 'position: absolute' is for z-index -->
+     <% if flash[:notice] %>
+       <div class="ui success message"><span class="close">x</span><%= flash[:notice] %></div>
+     <% elsif flash[:error] %>
+        <div class="ui red message"><span class="close">x</span><%= flash[:error] %></div>
+     <% elsif flash[:alert] %>
+     <div class="ui negative message"><span class="close">x</span><%= flash[:alert] %></div>
+     <% end %>
+   </div>
+
+    <%= yield %>
+  </body>
+</html>

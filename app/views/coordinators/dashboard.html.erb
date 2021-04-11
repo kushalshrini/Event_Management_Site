@@ -1,0 +1,36 @@
+<!-- <h1>Welcome <%#= current_coordinator.email %></h1><%#= image_tag current_coordinator.profile.avatar.variant(resize: '100x100'), class: "ui medium circular image" if current_coordinator.profile %> -->
+
+<!-- Code for Clubs associated to coordinator -->
+
+<% @current_coordinator.clubs.each do |club| if @current_coordinator.clubs.any? %>
+<!-- .clubs returns collection of clubs associated with the current coordinator if any association exists. From, coordinators#dashboard -->
+ <%= club.name %><br>
+ <%= club.description %><hr>
+ <% end %>
+<% end %>
+
+<div class="ui container" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center; margin-top: 30px;">
+      <% @current_coordinator.events.all.order(created_at: :desc).each do |event| if @current_coordinator.events.any? %>
+              <!-- Showing all events ordering by created Time, if present. From, coordinators#dashboard -->
+          <div class="ui card" id="cards" style="margin: 30px; max-width: 350px; max-height: 550px; min-width: 290px; min-height: 300px;">
+            <div class="image" style="align-self:center;" >
+                <%= link_to image_tag(event.image.first.variant(resize: '290x300>')), event_path(event) if event.image.attached? %> <!-- Looping through the images if it is present and also resizing them. find in event.rb model file -->
+            </div>
+            <div class="content">
+              <a class="header"><%= truncate(event.title, length: 30) %></a>
+              <div class="meta">
+                <span class="date"><%= time_ago_in_words(event.created_at) %> ago</span>
+              </div>
+              <div class="description">
+                <%= truncate(event.description, length: 35) %>
+              </div>
+            </div>
+            <div id="destroy_link_on_card" style="display:flex; justify-content:center;">
+                <%= link_to "Show", event_path(event), class: 'ui teal button' %>   <!-- Show button -->
+                <%= link_to 'Edit', edit_event_path(event), class: 'ui teal button' %>
+                <%= link_to 'Destroy Event', event_path(event), method: :delete, data: {confirm: "Are you sure?"}, class: 'ui basic red button' %>
+            </div><br>
+          </div>
+          <% end %>
+         <% end %>
+</div>
